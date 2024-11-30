@@ -5,7 +5,7 @@ import fs from 'fs'
 import path from 'path'
 import ora from 'ora'
 import { z } from 'zod'
-import { getFrameworkComponents } from '../utils'
+import { getFrameworkComponents } from '~/utils'
 
 const configSchema = z.object({
     outputDir: z.string(),

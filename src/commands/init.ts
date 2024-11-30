@@ -2,8 +2,8 @@ import { Command } from 'commander'
 import inquirer from 'inquirer'
 import chalk from 'chalk'
 import fs from 'fs'
-import { getFrameworkComponents, isTypeScriptFramework } from '../utils'
 import path from 'path'
+import { getFrameworkComponents, isTypeScriptFramework } from '~/utils'
 
 export const initCommand = new Command('init').description('Initialize apa-ui configuration file').action(async () => {
     console.log(chalk.cyan("Let's get you set up with apa-ui! 🚀"))
@@ -75,7 +75,7 @@ export const initCommand = new Command('init').description('Initialize apa-ui co
     }
 
     const isTS = isTypeScriptFramework(answers.framework)
-    const srcCnPath = path.join(__dirname, '../../../utils', isTS ? 'cn.ts' : 'cn.js')
+    const srcCnPath = path.join(__dirname, '../../utils', isTS ? 'cn.ts' : 'cn.js')
     const destCnPath = path.join(utilsDir, isTS ? 'cn.ts' : 'cn.js')
 
     if (fs.existsSync(destCnPath)) {

@@ -6,7 +6,7 @@ export const typescriptFrameworks = ['react-ts', 'svelte-ts']
 export const isTypeScriptFramework = (framework: string): boolean => typescriptFrameworks.includes(framework)
 
 export const getFrameworkComponents = () => {
-    const componentsDir = path.join(__dirname, '../../../components')
+    const componentsDir = path.join(__dirname, '../../components')
 
     if (!fs.existsSync(componentsDir)) {
         return {}

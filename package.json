@@ -2,12 +2,12 @@
     "name": "@apa-dev/ui",
     "module": "index.ts",
     "type": "module",
-    "version": "0.0.4-sigma.5",
+    "version": "0.0.4-sigma.9",
     "bin": {
         "apa-ui": "dist/main.js"
     },
     "scripts": {
-        "build": "bun build ./src/cli/main.ts ./src/cli/**/*.ts --outdir ./dist --target=bun --sourcemap=linked --minify",
+        "build": "bun build ./src/*.ts ./src/**/*.ts --outdir ./dist --target=node --sourcemap=linked --minify",
         "npm": "bun format && bun run build && bun publish --access public",
         "format": "prettier --write ."
     },
