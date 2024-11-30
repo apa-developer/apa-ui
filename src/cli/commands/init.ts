@@ -34,7 +34,7 @@ export const initCommand = new Command('init').description('Initialize apa-ui co
             type: 'list',
             name: 'framework',
             message: 'Which framework are you using?',
-            choices: ['react', 'vue', 'svelte', 'angular', 'lit'],
+            choices: ['react', 'react-ts', 'vue', 'svelte', 'angular', 'lit'],
             default: 'react',
         },
     ])
