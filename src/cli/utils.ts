@@ -3,7 +3,7 @@ import path from 'path'
 
 // Read available frameworks and components
 export const getFrameworkComponents = () => {
-    const componentsDir = path.join('src', 'components')
+    const componentsDir = path.join('components')
     if (!fs.existsSync(componentsDir)) {
         return {}
     }

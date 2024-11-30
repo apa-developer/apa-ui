@@ -8,7 +8,10 @@ import { listCommand } from './commands/list'
 
 const program = new Command()
 
-program.name('apa-ui').description('The chill UI component CLI for all your framework needs 😎').version('0.0.1')
+program
+    .name('apa-ui')
+    .description('The chill UI component CLI for all your framework needs 😎')
+    .version(process.env.npm_package_version as string)
 
 // Register commands
 program.addCommand(initCommand)

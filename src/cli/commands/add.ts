@@ -71,10 +71,10 @@ export const addCommand = new Command('add')
 
         const fileExtension = path.extname(
             fs
-                .readdirSync(path.join('src', 'components', selectedFramework))
+                .readdirSync(path.join('components', selectedFramework))
                 .find((file) => file.startsWith(selectedComponent)) || ''
         )
-        const srcPath = path.join('src', 'components', selectedFramework, `${selectedComponent}${fileExtension}`)
+        const srcPath = path.join('components', selectedFramework, `${selectedComponent}${fileExtension}`)
         const destPath = path.join(outputDir, `${selectedComponent}${fileExtension}`)
 
         // Confirm overwrite if file exists
