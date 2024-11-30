@@ -6,6 +6,7 @@ import path from 'path'
 import ora from 'ora'
 import { z } from 'zod'
 import { getFrameworkComponents } from '~/utils'
+import { fileURLToPath } from 'url'
 
 const configSchema = z.object({
     outputDir: z.string(),
@@ -74,7 +75,10 @@ export const addCommand = new Command('add')
                 .readdirSync(path.join('components', selectedFramework))
                 .find((file) => file.startsWith(selectedComponent)) || ''
         )
-        const srcPath = path.join('components', selectedFramework, `${selectedComponent}${fileExtension}`)
+        const __filename = fileURLToPath(import.meta.url)
+        const __dirname = path.dirname(__filename)
+        const componentsDir = path.resolve(__dirname, '../components')
+        const srcPath = path.join(componentsDir, selectedFramework, `${selectedComponent}${fileExtension}`)
         const destPath = path.join(outputDir, `${selectedComponent}${fileExtension}`)
 
         // Confirm overwrite if file exists
