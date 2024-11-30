@@ -1,9 +1,12 @@
 import fs from 'fs'
 import path from 'path'
 
-// Read available frameworks and components
+export const typescriptFrameworks = ['react-ts', 'svelte-ts']
+
+export const isTypeScriptFramework = (framework: string): boolean => typescriptFrameworks.includes(framework)
+
 export const getFrameworkComponents = () => {
-    const componentsDir = path.join('components')
+    const componentsDir = path.join(__dirname, '../../../components')
     if (!fs.existsSync(componentsDir)) {
         return {}
     }

@@ -1,5 +1,6 @@
 'use client'
-import * as React from 'react'
+
+import React from 'react'
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>
 
