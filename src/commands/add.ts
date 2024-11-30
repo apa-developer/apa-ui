@@ -70,14 +70,15 @@ export const addCommand = new Command('add')
             process.exit(1)
         }
 
-        const fileExtension = path.extname(
-            fs
-                .readdirSync(path.join('components', selectedFramework))
-                .find((file) => file.startsWith(selectedComponent)) || ''
-        )
         const __filename = fileURLToPath(import.meta.url)
         const __dirname = path.dirname(__filename)
         const componentsDir = path.resolve(__dirname, '../components')
+
+        const fileExtension = path.extname(
+            fs
+                .readdirSync(path.join(componentsDir, selectedFramework))
+                .find((file) => file.startsWith(selectedComponent)) || ''
+        )
         const srcPath = path.join(componentsDir, selectedFramework, `${selectedComponent}${fileExtension}`)
         const destPath = path.join(outputDir, `${selectedComponent}${fileExtension}`)
 
