@@ -2,7 +2,7 @@
     "name": "@apa-dev/ui",
     "module": "index.ts",
     "type": "module",
-    "version": "0.0.4-sigma.3",
+    "version": "0.0.4-sigma.5",
     "bin": {
         "apa-ui": "dist/main.js"
     },
