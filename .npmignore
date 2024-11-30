@@ -1,0 +1,8 @@
+/src/
+/tests/
+.editorconfig
+.gitignore
+.prettierignore
+.prettierrc
+CONTRIBUTING.md
+tsconfig.json
