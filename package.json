@@ -2,7 +2,7 @@
     "name": "@apa-dev/ui",
     "module": "index.ts",
     "type": "module",
-    "version": "0.0.4-sigma.17",
+    "version": "0.0.4-sigma.19",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/apa-developer/apa-ui.git"

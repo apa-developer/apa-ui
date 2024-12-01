@@ -7,7 +7,10 @@ import { forwardRef } from 'react'
  */
 const Button = forwardRef(({ children, className, ...props }) => (
     <button
-        className={`text-sm font-semibold shadow-[3px_3px_0_0_#000] border-2 border-black bg-sky-300 h-10 px-4 rounded hover:translate-x-[3px] hover:shadow-none hover:translate-y-[3px] transition-all ${className}`}
+        className={cn(
+            'text-sm font-semibold shadow-[3px_3px_0_0_#000] border-2 border-black bg-sky-300 h-10 px-4 rounded hover:translate-x-[3px] hover:shadow-none hover:translate-y-[3px] transition-all',
+            className
+        )}
         {...props}
     >
         {children}
