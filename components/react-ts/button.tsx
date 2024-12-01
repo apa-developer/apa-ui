@@ -1,14 +1,13 @@
 'use client'
 
 import { cn } from '@/utils/cn'
-import React, { type ButtonHTMLAttributes, forwardRef } from 'react'
+import { type ButtonHTMLAttributes, forwardRef } from 'react'
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
 
 /**
  * Button component from Apa UI
  */
-// eslint-disable-next-line react/display-name
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ children, className, ...props }) => (
     <button
         className={cn(

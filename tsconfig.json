@@ -29,6 +29,6 @@
 
         "types": ["bun-types"]
     },
-    "include": ["*/**/*.ts"],
+    "include": ["*/**/*.ts", "*/**/*.tsx", "*/**/*.js", "*/**/*.jsx"],
     "exclude": ["node_modules", "dist"]
 }

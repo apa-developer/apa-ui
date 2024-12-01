@@ -1,0 +1,29 @@
+name: Main on Pull Request
+
+on:
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+
+        permissions:
+            contents: write
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: bun install
+              uses: oven-sh/setup-bun@v2
+              run: bun install
+
+            - name: bun lint:fix
+              run: bun lint:fix
+
+            - name: Commit linted files if any
+              uses: stefanzweifel/git-auto-commit-action@v5
+              with:
+                  commit_message: 'Auto fix lint error(s)'
