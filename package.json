@@ -3,6 +3,14 @@
     "module": "index.ts",
     "type": "module",
     "version": "0.0.4-sigma.17",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/apa-developer/apa-ui.git"
+    },
+    "bugs": {
+        "url": "https://github.com/apa-developer/apa-ui/issues"
+    },
+    "homepage": "https://github.com/apa-developer/apa-ui/blob/main/README.md",
     "bin": {
         "apa-ui": "dist/main.js"
     },
