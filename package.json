@@ -17,8 +17,7 @@
     "scripts": {
         "build": "bun build ./src/*.ts ./src/**/*.ts --outdir ./dist --target=node --sourcemap=linked --minify",
         "npm": "bun format && bun run build && bun publish --access public",
-        "format": "prettier --write .",
-        "lint": "eslint ."
+        "lint:fix": "eslint --fix"
     },
     "devDependencies": {
         "@types/bun": "latest",
