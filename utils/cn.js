@@ -1,8 +1,6 @@
-const { twMerge } = require('tailwind-merge')
-const clsx = require('clsx')
+import { twMerge } from 'tailwind-merge'
+import clsx from 'clsx'
 
-function cn(...inputs) {
+export function cn(...inputs) {
     return twMerge(clsx(inputs))
 }
-
-module.exports = { cn }
