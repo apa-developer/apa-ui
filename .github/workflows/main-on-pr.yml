@@ -1,4 +1,4 @@
-name: Main on Pull Request
+name: Main branch on Pull Request
 
 on:
     pull_request:
@@ -31,18 +31,8 @@ jobs:
                   commit_message: 'Auto fix lint error(s)'
                   file_pattern: '. :!bun.lockb'
 
-    # build:
-    #     runs-on: ubuntu-latest
+            # - name: 🧪 MINIMAL ADA TESTING SIH
+            #   run: bun run test
 
-    #     steps:
-    #         - name: Checkout code
-    #           uses: actions/checkout@v4
-
-    #         - name: Setup bun
-    #           uses: oven-sh/setup-bun@v2
-
-    #         - name: Install dependencies
-    #           run: bun install
-
-    #         - name: Build Apa-UI
-    #           run: bun run build
+            - name: Build Apa-UI
+              run: bun run build
