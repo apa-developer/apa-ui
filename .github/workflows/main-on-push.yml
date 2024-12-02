@@ -1,16 +1,16 @@
-name: Main branch on Pull Request
+name: Main branch on push
 
 on:
-    pull_request:
+    push:
         branches:
             - main
 
 jobs:
-    lint:
+    build:
         runs-on: ubuntu-latest
 
-        permissions:
-            contents: write
+        # permissions:
+        #     contents: write
 
         steps:
             - name: Checkout code
@@ -22,17 +22,14 @@ jobs:
             - name: Install dependencies
               run: bun install
 
-            - name: Lint code
-              run: bun lint:fix
-
-            - name: Commit linted files if any
-              uses: stefanzweifel/git-auto-commit-action@v5
-              with:
-                  commit_message: 'Auto fix lint error(s)'
-                  file_pattern: '. :!bun.lockb'
-
             # - name: 🧪 MINIMAL ADA TESTING SIH
             #   run: bun run test
 
             - name: Build Apa-UI
               run: bun run build
+
+            # - name: Commit builded files if any changes
+            #   uses: stefanzweifel/git-auto-commit-action@v5
+            #   with:
+            #       commit_message: 'Auto build files'
+            #       file_pattern: '. :!bun.lockb'
