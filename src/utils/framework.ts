@@ -1,16 +1,13 @@
 import fs from 'fs'
 import path from 'path'
-import { fileURLToPath } from 'url'
+import { dirname } from './dirname'
 
 export const typescriptFrameworks = ['react-ts', 'svelte-ts']
 
 export const isTypeScriptFramework = (framework: string): boolean => typescriptFrameworks.includes(framework)
 
 export const getFrameworkComponents = () => {
-    const __filename = fileURLToPath(import.meta.url)
-    const __dirname = path.dirname(__filename)
-
-    const componentsDir = path.join(__dirname, '../components')
+    const componentsDir = path.join(dirname, '../components')
 
     if (!fs.existsSync(componentsDir)) {
         return {}

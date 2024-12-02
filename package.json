@@ -16,7 +16,7 @@
     },
     "scripts": {
         "build": "bun build ./src/*.ts ./src/**/*.ts --outdir ./dist --target=node --sourcemap=linked --minify",
-        "npm": "bun format && bun run build && bun publish --access public",
+        "npm": "bun lint:fix && bun run build && bun publish --access public",
         "lint:fix": "eslint --fix"
     },
     "devDependencies": {
@@ -24,6 +24,7 @@
         "@types/bun": "latest",
         "@types/eslint-config-prettier": "^6.11.3",
         "@types/react": "^18.3.12",
+        "@types/semver": "^7.5.8",
         "bun-types": "^1.1.38",
         "clsx": "^2.1.1",
         "eslint": "^9.16.0",
@@ -43,6 +44,7 @@
         "commander": "^12.1.0",
         "inquirer": "^12.1.0",
         "ora": "^8.1.1",
+        "semver": "^7.6.3",
         "prettier-plugin-tailwindcss": "^0.6.9",
         "zod": "^3.23.8"
     }

@@ -5,8 +5,8 @@ import fs from 'fs'
 import path from 'path'
 import ora from 'ora'
 import { z } from 'zod'
-import { getFrameworkComponents } from '~/utils'
-import { fileURLToPath } from 'url'
+import { getFrameworkComponents } from '~/utils/framework'
+import { dirname } from '~/utils/dirname'
 
 const configSchema = z.object({
     outputDir: z.string(),
@@ -70,9 +70,7 @@ export const addCommand = new Command('add')
             process.exit(1)
         }
 
-        const __filename = fileURLToPath(import.meta.url)
-        const __dirname = path.dirname(__filename)
-        const componentsDir = path.resolve(__dirname, '../components')
+        const componentsDir = path.resolve(dirname, '../components')
 
         const fileExtension = path.extname(
             fs

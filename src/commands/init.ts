@@ -3,8 +3,8 @@ import inquirer from 'inquirer'
 import chalk from 'chalk'
 import fs from 'fs'
 import path from 'path'
-import { getFrameworkComponents, isTypeScriptFramework } from '~/utils'
-import { fileURLToPath } from 'url'
+import { getFrameworkComponents, isTypeScriptFramework } from '~/utils/framework'
+import { dirname } from '~/utils/dirname'
 
 export const initCommand = new Command('init').description('Initialize apa-ui configuration file').action(async () => {
     console.log(chalk.cyan("Let's get you set up with apa-ui! 🚀"))
@@ -76,9 +76,8 @@ export const initCommand = new Command('init').description('Initialize apa-ui co
     }
 
     const isTS = isTypeScriptFramework(answers.framework)
-    const __filename = fileURLToPath(import.meta.url)
-    const __dirname = path.dirname(__filename)
-    const srcCnPath = path.join(__dirname, '../utils', isTS ? 'cn.ts' : 'cn.js')
+
+    const srcCnPath = path.join(dirname, '../utils', isTS ? 'cn.ts' : 'cn.js')
     const destCnPath = path.join(utilsDir, isTS ? 'cn.ts' : 'cn.js')
 
     if (fs.existsSync(destCnPath)) {
@@ -93,7 +92,7 @@ export const initCommand = new Command('init').description('Initialize apa-ui co
 
         if (!overwriteUtils) {
             console.log(chalk.yellow('No changes made to utility files. Exiting...'))
-            return
+            process.exit(0)
         }
     }
 
