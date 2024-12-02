@@ -10,7 +10,7 @@ permissions:
     contents: read # for checkout
 
 jobs:
-    build:
+    release:
         runs-on: ubuntu-latest
 
         permissions:
@@ -40,6 +40,6 @@ jobs:
             - name: Semantic Release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
               run: bunx semantic-release
