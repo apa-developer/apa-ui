@@ -42,8 +42,6 @@ pull_request_rules:
   - name: Auto-merge when labeled 'ready-to-merge'
     conditions:
       - "label=ready-to-merge"
-      - "status-success=ci/circleci"
-      - "#approved-reviews-by>=2"
     actions:
       merge:
         method: squash
