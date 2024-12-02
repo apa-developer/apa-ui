@@ -16,7 +16,7 @@
     },
     "scripts": {
         "build": "bun build ./src/*.ts ./src/**/*.ts --outdir ./dist --target=node --sourcemap=linked --minify",
-        "pm": "bun lint:fix && bun run build && bun publish --access public",
+        "npm": "bun lint:fix && bun run build && bun publish --access public",
         "lint:check": "eslint",
         "lint:fix": "eslint --fix",
         "prepare": "husky"
