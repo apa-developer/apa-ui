@@ -1,76 +1,76 @@
 pull_request_rules:
-  - name: Add label for React files
-    conditions:
-      - "files~=\\.(jsx|tsx)$"
-    actions:
-      label:
-        add:
-          - "React"
+    - name: Add label for React files
+      conditions:
+          - "files~=\\.(jsx|tsx)$"
+      actions:
+          label:
+              add:
+                  - 'React'
 
-  - name: Add label for Svelte files
-    conditions:
-      - "files~=\\.svelte$"
-    actions:
-      label:
-        add:
-          - "Svelte"
+    - name: Add label for Svelte files
+      conditions:
+          - "files~=\\.svelte$"
+      actions:
+          label:
+              add:
+                  - 'Svelte'
 
-  - name: Add label for Markdown files
-    conditions:
-      - "files~=\\.md$"
-    actions:
-      label:
-        add:
-          - "Documentation"
+    - name: Add label for Markdown files
+      conditions:
+          - "files~=\\.md$"
+      actions:
+          label:
+              add:
+                  - 'Documentation'
 
-  - name: Add label for TypeScript files
-    conditions:
-      - "files~=\\.ts$"
-    actions:
-      label:
-        add:
-          - "TypeScript"
+    - name: Add label for TypeScript files
+      conditions:
+          - "files~=\\.ts$"
+      actions:
+          label:
+              add:
+                  - 'TypeScript'
 
-  - name: Add label for JavaScript files
-    conditions:
-      - "files~=\\.js$"
-    actions:
-      label:
-        add:
-          - "JavaScript"
+    - name: Add label for JavaScript files
+      conditions:
+          - "files~=\\.js$"
+      actions:
+          label:
+              add:
+                  - 'JavaScript'
 
-  - name: Auto-merge when labeled 'ready-to-merge'
-    conditions:
-      - "label=ready-to-merge"
-    actions:
-      comment:
-        message: >
-          🎉 Hey there, congrats on merging your PR!  
-          Thanks for your awesome contribution. Keep up the great work 🚀  
-          This PR is now part of the project — let’s build something amazing together! ✨
-      merge:
-        method: squash
+    - name: Auto-merge when labeled 'ready-to-merge'
+      conditions:
+          - 'label=ready-to-merge'
+      actions:
+          comment:
+              message: >
+                  🎉 Hey there, congrats on merging your PR!  
+                  Thanks for your awesome contribution. Keep up the great work 🚀  
+                  This PR is now part of the project — let’s build something amazing together! ✨
+          merge:
+              method: squash
 
-  - name: Add label after team review
-    conditions:
-      - "#approved-reviews-by>=2"
-    actions:
-      label:
-        add:
-          - "Reviewed"
+    - name: Add label after team review
+      conditions:
+          - '#approved-reviews-by>=2'
+      actions:
+          label:
+              add:
+                  - 'Reviewed'
 
-  - name: Request review from the team
-    conditions:
-      - "author!=dependabot[bot]" 
-    actions:
-      request_reviews:
-        teams:
-          - "@apa-developer/apa-ui"
-  
-  - name: Auto-assign PR to the author
-    conditions:
-      - "author!=dependabot[bot]" 
-    actions:
-      assign:
-        users:
-          - "{{author}}" 
+    - name: Request review from the team
+      conditions:
+          - 'author!=dependabot[bot]'
+      actions:
+          request_reviews:
+              teams:
+                  - '@apa-developer/apa-ui'
+
+    - name: Auto-assign PR to the author
+      conditions:
+          - 'author!=dependabot[bot]'
+      actions:
+          assign:
+              users:
+                  - '{{author}}'

@@ -17,5 +17,8 @@ export default tseslint.config(
     },
     {
         files: ['**/*.js', '**/*.jsx'],
+    },
+    {
+        ignores: ['dist/*'],
     }
 )

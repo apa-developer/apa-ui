@@ -16,10 +16,14 @@
     },
     "scripts": {
         "build": "bun build ./src/*.ts ./src/**/*.ts --outdir ./dist --target=node --sourcemap=linked --minify",
-        "npm": "bun lint:fix && bun run build && bun publish --access public",
-        "lint:fix": "eslint --fix"
+        "pm": "bun lint:fix && bun run build && bun publish --access public",
+        "lint:check": "eslint",
+        "lint:fix": "eslint --fix",
+        "prepare": "husky"
     },
     "devDependencies": {
+        "@commitlint/cli": "^19.6.0",
+        "@commitlint/config-conventional": "^19.6.0",
         "@eslint/js": "^9.16.0",
         "@types/bun": "latest",
         "@types/eslint-config-prettier": "^6.11.3",
@@ -30,6 +34,7 @@
         "eslint": "^9.16.0",
         "eslint-config-prettier": "^9.1.0",
         "eslint-plugin-prettier": "^5.2.1",
+        "husky": "^9.1.7",
         "prettier": "^3.4.1",
         "react": "^18.3.1",
         "tailwind-merge": "^2.5.5",
