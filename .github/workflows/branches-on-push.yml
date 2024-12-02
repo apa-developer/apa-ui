@@ -1,0 +1,30 @@
+name: Branches on push
+
+on:
+    push:
+        branches:
+            - main
+            - sigma
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup bun
+              uses: oven-sh/setup-bun@v2
+
+            - name: Install dependencies
+              run: bun install
+
+            - name: Build Apa-UI
+              run: bun run build
+
+            - name: Semantic Release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+              run: bunx semantic-release
