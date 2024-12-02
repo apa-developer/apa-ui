@@ -43,6 +43,11 @@ pull_request_rules:
     conditions:
       - "label=ready-to-merge"
     actions:
+      comment:
+        message: >
+          🎉 Hey there, congrats on merging your PR!  
+          Thanks for your awesome contribution. Keep up the great work 🚀  
+          This PR is now part of the project — let’s build something amazing together! ✨
       merge:
         method: squash
 
@@ -61,13 +66,11 @@ pull_request_rules:
       request_reviews:
         teams:
           - "@apa-developer/apa-ui"
-
-  - name: Reply with a message when merged
+  
+  - name: Auto-assign PR to the author
     conditions:
-      - "label=ready-to-merge"
+      - "author!=dependabot[bot]" 
     actions:
-      comment:
-        message: >
-          🎉 Hey there, congrats on merging your PR!  
-          Thanks for your awesome contribution. Keep up the great work 🚀  
-          This PR is now part of the project — let’s build something amazing together! ✨
+      assign:
+        users:
+          - "{{author}}" 
