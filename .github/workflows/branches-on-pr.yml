@@ -1,9 +1,10 @@
-name: Main branch on Pull Request
+name: Branches on Pull Request
 
 on:
     pull_request:
         branches:
             - main
+            - sigma
 
 jobs:
     lint:
@@ -23,13 +24,7 @@ jobs:
               run: bun install
 
             - name: Lint code
-              run: bun lint:fix
-
-            - name: Commit linted files if any
-              uses: stefanzweifel/git-auto-commit-action@v5
-              with:
-                  commit_message: 'Auto fix lint error(s)'
-                  file_pattern: '. :!bun.lockb'
+              run: bun lint
 
             # - name: 🧪 MINIMAL ADA TESTING SIH
             #   run: bun run test
