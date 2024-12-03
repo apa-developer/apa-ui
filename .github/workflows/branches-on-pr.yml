@@ -7,7 +7,7 @@ on:
             - sigma
 
 jobs:
-    lint:
+    code-quality:
         runs-on: ubuntu-latest
 
         permissions:
@@ -24,7 +24,7 @@ jobs:
               run: bun install
 
             - name: Lint code
-              run: bun lint
+              run: bun run lint
 
             # - name: 🧪 MINIMAL ADA TESTING SIH
             #   run: bun run test
