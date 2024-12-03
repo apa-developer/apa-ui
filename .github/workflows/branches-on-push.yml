@@ -42,4 +42,13 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
-              run: bunx semantic-release
+              run:
+                  - mkdir release
+                  - cp -r components/* release
+                  - cp -r dist/* release
+                  - cp -r utils/* release
+                  - cp LICENSE release
+                  - cp README.md release
+                  - cp package.json release
+                  - cd release
+                  - bunx semantic-release
