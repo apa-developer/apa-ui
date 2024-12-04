@@ -1,6 +1,7 @@
 {
     "name": "@apa-dev/ui",
-    "module": "index.ts",
+    "author": "Apa Developer",
+    "license": "MIT",
     "type": "module",
     "repository": {
         "type": "git",
