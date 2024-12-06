@@ -37,14 +37,14 @@ jobs:
             - name: Build Apa-UI
               run: bun run build
 
-            - run: mkdir release
-            - run: cp -r components/* release
-            - run: cp -r dist/* release
-            - run: cp -r utils/* release
-            - run: cp LICENSE release
-            - run: cp README.md release
-            - run: cp package.json release
-            - run: cd release
+            # Remove unnecessary files
+            - run: rm -r .github
+            - run: rm -r .husky
+            - run: rm .mergify.yml
+            - run: rm bun.lockb
+            - run: rm commitlint.config.js
+            - run: rm eslint.config.mjs
+            - run: rm release.config.mjs
 
             - name: Semantic Release
               env:
