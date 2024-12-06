@@ -6,7 +6,6 @@ import { cn } from '@/utils/cn'
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>{
   icon?: React.ReactNode,
   className?: string,
-  variant?: 'textOnly' | 'textAndIcon',
 }
 
 /**
