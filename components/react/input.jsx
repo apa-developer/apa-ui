@@ -3,16 +3,10 @@
 import React from 'react'
 import { cn } from '@/utils/cn'
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>{
-  icon?: React.ReactNode,
-  className?: string,
-  variant?: 'textOnly' | 'textAndIcon',
-}
-
 /**
  * Input component from Apa UI
  */
-const Input = ({  className, ...props }: InputProps) => {
+const Input = ({  className, ...props }) => {
   return (
       <input
         {...props}
