@@ -37,15 +37,6 @@ jobs:
             - name: Build Apa-UI
               run: bun run build
 
-            # Remove unnecessary files
-            - run: rm -r .github
-            - run: rm -r .husky
-            - run: rm .mergify.yml
-            - run: rm bun.lockb
-            - run: rm commitlint.config.js
-            - run: rm eslint.config.mjs
-            - run: rm release.config.mjs
-
             - name: Semantic Release
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,9 +1,16 @@
+/.github/
+/.husky/
 /src/
 /tests/
 /example/
 .editorconfig
 .gitignore
+.mergify.yml
 .prettierignore
 .prettierrc
+bun.lockb
+commitlint.config.js
 CONTRIBUTING.md
+eslint.config.mjs
+release.config.mjs
 tsconfig.json
