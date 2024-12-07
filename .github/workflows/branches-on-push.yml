@@ -22,6 +22,8 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
             - uses: actions/setup-node@v4
               with:
@@ -36,6 +38,12 @@ jobs:
 
             - name: Lint code
               run: bun run lint:check
+
+            - name: Validate current commit (last commit) with commitlint
+              run: bunx commitlint --last --verbose
+
+            # - name: 🧪 MINIMAL ADA TESTING SIH
+            #   run: bun run test
 
             - name: Build Apa-UI
               run: bun run build
