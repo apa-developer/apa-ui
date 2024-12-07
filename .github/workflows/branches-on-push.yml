@@ -37,6 +37,12 @@ jobs:
             - name: Lint code
               run: bun run lint:check
 
+            - name: Validate current commit (last commit) with commitlint
+              run: bunx commitlint --last --verbose
+
+            # - name: 🧪 MINIMAL ADA TESTING SIH
+            #   run: bun run test
+
             - name: Build Apa-UI
               run: bun run build
 
