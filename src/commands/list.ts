@@ -1,6 +1,12 @@
 import { Command } from 'commander'
 import chalk from 'chalk'
 import { getFrameworkComponents } from '~/utils/framework'
+import Table from 'cli-table3'
+import terminalLink from 'terminal-link'
+
+const generateLink = (component: string): string => {
+    return terminalLink(component, '#')
+}
 
 export const listCommand = new Command('list').description('List available frameworks and components').action(() => {
     const frameworkComponents = getFrameworkComponents()
@@ -12,10 +18,18 @@ export const listCommand = new Command('list').description('List available frame
 
     console.log(chalk.cyan('Available frameworks and components:'))
 
-    console.table(
-        Object.entries(frameworkComponents).map(([framework, components]) => ({
-            Framework: framework,
-            Components: components.join(', '),
-        }))
-    )
+    const table = new Table({
+        head: ['Framework', 'Components'],
+        style: { head: ['cyan'] },
+        colWidths: [20, 50],
+    })
+
+    Object.entries(frameworkComponents).map(([framework, components]) => {
+        const linkedComponents = components.map((component) => generateLink(component))
+        table.push([framework, linkedComponents.join(', ')])
+    })
+
+    console.log(table.toString())
+
+    console.log(chalk.yellow('Note: Component name are clickable links that will take you to the documentation.'))
 })
