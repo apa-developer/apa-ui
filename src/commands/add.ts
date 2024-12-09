@@ -7,10 +7,14 @@ import ora from 'ora'
 import { z } from 'zod'
 import { getFrameworkComponents } from '~/utils/framework'
 import { dirname } from '~/utils/dirname'
+import { replaceLine } from '~/utils/replace-line'
 
 const configSchema = z.object({
-    outputDir: z.string(),
+    componentDir: z.string(),
     framework: z.string(),
+    utilsDir: z.string(),
+    componentsAlias: z.string(),
+    utilsAlias: z.string(),
 })
 
 export const addCommand = new Command('add')
@@ -37,7 +41,7 @@ export const addCommand = new Command('add')
             process.exit(1)
         }
 
-        const { outputDir, framework } = parsedConfig.data
+        const { componentDir, framework, utilsAlias } = parsedConfig.data
         const selectedFramework = options.framework || framework
 
         const frameworkComponents = getFrameworkComponents()
@@ -78,7 +82,7 @@ export const addCommand = new Command('add')
                 .find((file) => file.startsWith(selectedComponent)) || ''
         )
         const srcPath = path.join(componentsDir, selectedFramework, `${selectedComponent}${fileExtension}`)
-        const destPath = path.join(outputDir, `${selectedComponent}${fileExtension}`)
+        const destPath = path.join(componentDir, `${selectedComponent}${fileExtension}`)
 
         // Confirm overwrite if file exists
         if (fs.existsSync(destPath)) {
@@ -100,6 +104,10 @@ export const addCommand = new Command('add')
         // Copy component
         spinner.start(`Adding ${selectedComponent} to your project...`)
         fs.copyFileSync(srcPath, destPath)
-        spinner.succeed(chalk.green(`${selectedComponent} added successfully to ${outputDir}! 🎉`))
+
+        const utilsImport = `import { cn } from '${utilsAlias}/cn'`
+        replaceLine(destPath, "import { cn } from '@/utils/cn'", utilsImport)
+
+        spinner.succeed(chalk.green(`${selectedComponent} added successfully to ${componentDir}! 🎉`))
         process.exit(0)
     })

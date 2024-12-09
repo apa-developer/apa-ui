@@ -31,7 +31,7 @@ export const initCommand = new Command('init').description('Initialize apa-ui co
     const answers = await inquirer.prompt([
         {
             type: 'input',
-            name: 'outputDir',
+            name: 'componentDir',
             message: 'Where should the components be generated? (e.g., src/components)',
             default: 'src/components',
         },
@@ -50,21 +50,38 @@ export const initCommand = new Command('init').description('Initialize apa-ui co
         },
     ])
 
+    const aliases = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'componentsAlias',
+            message: 'What should the alias be for components folder?',
+            default: '@/' + answers.componentDir.replace('src/', ''),
+        },
+        {
+            type: 'input',
+            name: 'utilsAlias',
+            message: 'What should the alias be for utilities folder?',
+            default: '@/' + answers.utilsDir.replace('src/', ''),
+        },
+    ])
+
     const config = {
-        outputDir: answers.outputDir,
+        componentDir: answers.componentDir,
         framework: answers.framework,
         utilsDir: answers.utilsDir,
+        componentsAlias: aliases.componentsAlias,
+        utilsAlias: aliases.utilsAlias,
     }
 
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2))
     console.log(chalk.green('Configuration file created successfully! 🎉'))
 
-    const outputDir = path.resolve(answers.outputDir)
-    if (!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir, { recursive: true })
-        console.log(chalk.green(`Output directory "${answers.outputDir}" created successfully! 🎉`))
+    const componentDir = path.resolve(answers.componentDir)
+    if (!fs.existsSync(componentDir)) {
+        fs.mkdirSync(componentDir, { recursive: true })
+        console.log(chalk.green(`Output directory "${answers.componentDir}" created successfully! 🎉`))
     } else {
-        console.log(chalk.yellow(`Output directory "${answers.outputDir}" already exists.`))
+        console.log(chalk.yellow(`Output directory "${answers.componentDir}" already exists.`))
     }
 
     const utilsDir = path.resolve(answers.utilsDir)
