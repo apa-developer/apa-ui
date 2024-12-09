@@ -15,7 +15,7 @@
         "apa-ui": "dist/main.js"
     },
     "scripts": {
-        "build": "bun build ./src/*.ts ./src/**/*.ts --outdir ./dist --target=node --sourcemap=linked --minify",
+        "build": "bun build ./src/**/*.ts ./src/main.ts --outdir ./dist --target=node --sourcemap=linked --minify --root src",
         "npm": "bun lint:fix && bun run build && bun publish --access public",
         "lint:check": "eslint",
         "lint:fix": "eslint --fix",

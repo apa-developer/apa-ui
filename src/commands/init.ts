@@ -3,12 +3,12 @@ import inquirer from 'inquirer'
 import chalk from 'chalk'
 import fs from 'fs'
 import path from 'path'
+import ora from 'ora'
 import { getFrameworkComponents, isTypeScriptFramework } from '~/utils/framework'
 import { dirname } from '~/utils/dirname'
+import { installDependencies } from '~/utils/install-dependencies'
 
 export const initCommand = new Command('init').description('Initialize apa-ui configuration file').action(async () => {
-    console.log(chalk.cyan("Let's get you set up with apa-ui! 🚀"))
-
     const configPath = 'apa.config.json'
     if (fs.existsSync(configPath)) {
         const { overwrite } = await inquirer.prompt([
@@ -73,23 +73,25 @@ export const initCommand = new Command('init').description('Initialize apa-ui co
         utilsAlias: aliases.utilsAlias,
     }
 
+    const spinner = ora("Let's get you set up with apa-ui! 🚀").start()
+
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2))
-    console.log(chalk.green('Configuration file created successfully! 🎉'))
+    spinner.succeed('Configuration file created successfully! 🎉')
 
     const componentDir = path.resolve(answers.componentDir)
     if (!fs.existsSync(componentDir)) {
         fs.mkdirSync(componentDir, { recursive: true })
-        console.log(chalk.green(`Output directory "${answers.componentDir}" created successfully! 🎉`))
+        spinner.succeed(`Output directory "${answers.componentDir}" created successfully! 🎉`)
     } else {
-        console.log(chalk.yellow(`Output directory "${answers.componentDir}" already exists.`))
+        spinner.info(`Output directory "${answers.componentDir}" already exists.`)
     }
 
     const utilsDir = path.resolve(answers.utilsDir)
     if (!fs.existsSync(utilsDir)) {
         fs.mkdirSync(utilsDir, { recursive: true })
-        console.log(chalk.green(`Utilities directory "${answers.utilsDir}" created successfully! 🎉`))
+        spinner.succeed(`Utilities directory "${answers.utilsDir}" created successfully! 🎉`)
     } else {
-        console.log(chalk.yellow(`Utilities directory "${answers.utilsDir}" already exists.`))
+        spinner.info(`Utilities directory "${answers.utilsDir}" already exists.`)
     }
 
     const isTS = isTypeScriptFramework(answers.framework)
@@ -108,11 +110,29 @@ export const initCommand = new Command('init').description('Initialize apa-ui co
         ])
 
         if (!overwriteUtils) {
-            console.log(chalk.yellow('No changes made to utility files. Exiting...'))
-            process.exit(0)
+            spinner.info('No changes made to utility files.')
+        } else {
+            fs.copyFileSync(srcCnPath, destCnPath)
+            spinner.succeed(`Utility file "${path.basename(destCnPath)}" copied successfully! 🎉`)
         }
     }
 
-    fs.copyFileSync(srcCnPath, destCnPath)
-    console.log(chalk.green(`Utility file "${path.basename(destCnPath)}" copied successfully! 🎉`))
+    const { shouldInstall } = await inquirer.prompt([
+        {
+            type: 'confirm',
+            name: 'shouldInstall',
+            message: 'Do you want to install the required dependencies automaticly?',
+            default: true,
+        },
+    ])
+
+    if (shouldInstall) {
+        spinner.succeed('Initialization complete! Now installing dependencies...')
+
+        const dependencies = [{ package: 'tailwind-merge' }, { package: 'clsx' }]
+
+        await installDependencies(dependencies)
+    } else {
+        spinner.info('Initialization complete! You can manually install dependencies later.')
+    }
 })
