@@ -176,3 +176,6 @@ dist
 
 # examples project for implement components
 examples
+
+# Other lock file
+package-lock.json
