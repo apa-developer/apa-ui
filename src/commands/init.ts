@@ -96,8 +96,10 @@ export const initCommand = new Command('init').description('Initialize apa-ui co
 
     const isTS = isTypeScriptFramework(answers.framework)
 
-    const srcCnPath = path.join(dirname, '../utils', isTS ? 'cn.ts' : 'cn.js')
-    const destCnPath = path.join(utilsDir, isTS ? 'cn.ts' : 'cn.js')
+    const utils = isTS ? 'cn.ts' : 'cn.js'
+
+    const srcCnPath = path.join(dirname, '../utils', utils)
+    const destCnPath = path.join(utilsDir, utils)
 
     if (fs.existsSync(destCnPath)) {
         const { overwriteUtils } = await inquirer.prompt([
@@ -113,8 +115,11 @@ export const initCommand = new Command('init').description('Initialize apa-ui co
             spinner.info('No changes made to utility files.')
         } else {
             fs.copyFileSync(srcCnPath, destCnPath)
-            spinner.succeed(`Utility file "${path.basename(destCnPath)}" copied successfully! 🎉`)
+            spinner.succeed(`Utility file "${path.basename(destCnPath)}" replaced successfully! `)
         }
+    } else {
+        fs.copyFileSync(srcCnPath, destCnPath)
+        spinner.succeed(`Utility file "${path.basename(destCnPath)}" copied successfully!`)
     }
 
     const { shouldInstall } = await inquirer.prompt([
@@ -129,7 +134,11 @@ export const initCommand = new Command('init').description('Initialize apa-ui co
     if (shouldInstall) {
         spinner.succeed('Initialization complete! Now installing dependencies...')
 
-        const dependencies = [{ package: 'tailwind-merge' }, { package: 'clsx' }]
+        const dependencies = [
+            { package: 'tailwind-merge' },
+            { package: 'clsx' },
+            { package: 'class-variance-authority' },
+        ]
 
         await installDependencies(dependencies)
     } else {
