@@ -126,7 +126,7 @@ export const initCommand = new Command('init').description('Initialize apa-ui co
         {
             type: 'confirm',
             name: 'shouldInstall',
-            message: 'Do you want to install the required dependencies automaticly?',
+            message: 'Do you want to install the required dependencies automatically?',
             default: true,
         },
     ])
